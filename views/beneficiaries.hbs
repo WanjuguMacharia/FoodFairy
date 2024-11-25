@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-6"><h1>Beneficiaries</h1></div> 
+  <div class="col-6 d-flex justify-content-end">
+    <a href="/addBeneficiary" type="button" class="btn btn-primary align-self-center">Add Beneficiary</a>
+  </div> 
+</div>
+
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Beneficiary Name</th>
+      <th scope="col">Contact Information</th>
+      <th scope="col">Location</th>
+      <th scope="col" class="text-end">Action </th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each rows}}
+    <tr>
+      <th scope="row">{{this.beneficiary_id}}</th>
+      <td>{{this.beneficiary_name}}</td>
+      <td>{{this.contact_info}}</td>
+      <td>{{this.location}}</td>
+      <td class="text-end">
+        <a href="/viewBeneficiary/{{this.beneficiary_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-eye">View</i></a>
+        <a href="/editBeneficiary/{{this.beneficiary_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-pencil">Edit</i></a>
+        <a href="/{{this.beneficiary_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-person-x">Delete</i></a>
+      </td>
+    </tr>
+
+    {{/each}}
+  </tbody>
+</table>
