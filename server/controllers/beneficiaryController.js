@@ -1,6 +1,5 @@
 const mysql = require("mysql2");
 
-
 const pool = mysql.createPool({
   connectionLimit: 100,
   host: process.env.DB_HOST,
@@ -8,7 +7,6 @@ const pool = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-
 
 // View users
 exports.viewBeneficiaries = (req, res) => {
@@ -27,6 +25,36 @@ exports.viewBeneficiaries = (req, res) => {
       }
 
       console.log("Data from the table:\n", rows);
+    });
+  });
+};
+
+exports.newBeneficiary = (req, res) => {
+  res.render("addBeneficiary");
+};
+
+exports.createBeneficiary = async (req, res) => {
+  const { name, contact, location } = req.body;
+
+  pool.getConnection((err, connection) => {
+    if (err) throw err;
+    console.log("Connected as ID " + connection.threadId);
+
+    const query =
+      "INSERT INTO beneficiaries (beneficiary_name, contact_info, location) VALUES (?, ?, ?)";
+    const values = [
+      name, contact, location
+    ];
+
+    connection.query(query, values, (err, rows) => {
+      connection.release();
+
+      if (!err) {
+        res.render("addBeneficiary", { alert: "Beneficiary added successfully" });
+      } else {
+        console.log(err);
+        res.sendStatus(500);
+      }
     });
   });
 };

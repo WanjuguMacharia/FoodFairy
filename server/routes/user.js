@@ -4,6 +4,8 @@ const beneficiaryController = require('../controllers/beneficiaryController');
 
 
 router.get('/', beneficiaryController.viewBeneficiaries)
+router.get('/addBeneficiary', beneficiaryController.newBeneficiary)
+router.post('/addBeneficiary', beneficiaryController.createBeneficiary)
 
 
 
