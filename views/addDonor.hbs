@@ -1,6 +1,6 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Beneficiaries</a></li>
+    <li class="breadcrumb-item"><a href="/donor">Donors</a></li>
     <li class="breadcrumb-item active" aria-current="page">Add Beneficiary</li>
   </ol>
 </nav>
@@ -13,7 +13,7 @@
 </div>
 {{/if}}
 
-<form class="row g-3 need-validation" method="POST" action="/addBeneficiary">
+<form class="row g-3 need-validation" method="POST" action="/addDonor">
   <div class="col-md-6">
     <label for="inputName" class="form-label">Full Name</label>
     <input type="text" class="form-control" id="name" name="name" required>
@@ -23,8 +23,8 @@
     <input type="text" class="form-control" id="contact" name="contact" required>
   </div>
   <div class="col-6">
-    <label for="inputLocation" class="form-label">Location</label>
-    <input type="text" class="form-control" id="location"  name="location" required>
+    <label for="inputAddress" class="form-label">Address</label>
+    <input type="text" class="form-control" id="address"  name="address" required>
   </div>
   <div class="col-12">
     <div class="form-check">
