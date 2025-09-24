@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-6"><h1>Donors</h1></div> 
+  <div class="col-6"><h1>Distribution Centers</h1></div> 
   <div class="col-6 d-flex justify-content-end">
-    <a href="/addDonor" type="button" class="btn btn-primary align-self-center">Add Donor</a>
+    <a href="/addCenters" type="button" class="btn btn-primary align-self-center">Add Center</a>
   </div> 
 </div>
 
@@ -10,9 +10,9 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Donor's Name</th>
+      <th scope="col">Center Name</th>
+      <th scope="col">Location</th>
       <th scope="col">Contact Information</th>
-      <th scope="col">Address</th>
       <th scope="col" class="text-end">Action </th>
 
     </tr>
@@ -21,14 +21,14 @@
 
     {{#each rows}}
     <tr>
-      <th scope="row">{{this.donor_id}}</th>
-      <td>{{this.donor_name}}</td>
+      <th scope="row">{{this.center_id}}</th>
+      <td>{{this.center_name}}</td>
+      <td>{{this.location}}</td>
       <td>{{this.contact_info}}</td>
-      <td>{{this.address}}</td>
       <td class="text-end">
         {{!-- <a href="/viewBeneficiary/{{this.beneficiary_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-eye">View</i></a> --}}
-        <a href="/editDonor/{{this.donor_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-pencil">Edit</i></a>
-        <a href="/{{this.donor_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-person-x">Delete</i></a>
+        <a href="/editCenter/{{this.center_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-pencil">Edit</i></a>
+        <a href="/{{this.center_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-person-x">Delete</i></a>
       </td>
     </tr>
 

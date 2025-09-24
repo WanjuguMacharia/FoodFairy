@@ -1,0 +1,86 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/records">Delivery Records</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add Record</li>
+  </ol>
+</nav>
+
+{{#if alert}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{alert}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+<form class="row g-3 need-validation" method="POST" action="/addRecord">
+
+  <!-- Donor dropdown -->
+  <div class="col-md-6">
+    <label for="donor" class="form-label">Donor</label>
+    <select class="form-select" id="donor" name="donor" required>
+      <option value="">Choose...</option>
+      {{#each donors}}
+        <option value="{{this.donor_name}}">{{this.donor_name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <!-- Beneficiary dropdown -->
+  <div class="col-md-6">
+    <label for="beneficiary" class="form-label">Beneficiary</label>
+    <select class="form-select" id="beneficiary" name="beneficiary" required>
+      <option value="">Choose...</option>
+      {{#each beneficiaries}}
+        <option value="{{this.beneficiary_name}}">{{this.beneficiary_name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <!-- Center dropdown -->
+  <div class="col-md-6">
+    <label for="center" class="form-label">Distribution Center</label>
+    <select class="form-select" id="center" name="center" required>
+      <option value="">Choose...</option>
+      {{#each centers}}
+        <option value="{{this.center_name}}">{{this.center_name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <!-- Food Type dropdown -->
+  <div class="col-md-6">
+    <label for="foodType" class="form-label">Food Type</label>
+    <select class="form-select" id="foodType" name="foodType" required>
+      <option value="">Choose...</option>
+      {{#each food_types}}
+        <option value="{{this.food_type}}">{{this.food_type}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <!-- Quantity -->
+  <div class="col-md-6">
+    <label for="quantity" class="form-label">Quantity</label>
+    <input type="number" class="form-control" id="quantity" name="quantity" required>
+  </div>
+
+  <!-- Delivery Date -->
+  <div class="col-md-6">
+    <label for="date" class="form-label">Delivery Date</label>
+    <input type="date" class="form-control" id="date" name="date" required>
+  </div>
+
+  <!-- Status -->
+  <div class="col-md-6">
+    <label for="status" class="form-label">Delivery Status</label>
+    <select class="form-select" id="status" name="status" required>
+      <option value="Pending">Pending</option>
+      <option value="Delivered">Delivered</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Add Record</button>
+  </div>
+</form>

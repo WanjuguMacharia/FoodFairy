@@ -50,7 +50,7 @@ exports.createBeneficiary = async (req, res) => {
       connection.release();
 
       if (!err) {
-        res.render("addBeneficiary", { alert: "Beneficiary added successfully" });
+        res.redirect("/");
       } else {
         console.log(err);
         res.sendStatus(500);
@@ -104,7 +104,7 @@ exports.updateBeneficiary = (req, res) => {
       connection.release();
 
       if (!err) {
-        res.render("editBeneficiary", { rows, alert: 'Beneficiary updated successfully' });
+        res.redirect("/");
       } else {
         console.log(err);
         res.sendStatus(500);
@@ -121,7 +121,7 @@ exports.updateBeneficiary = (req, res) => {
 //     if (err) throw err;
 //     console.log("Connected as ID " + connection.threadId);
 
-//     connection.query("DELETE  FROM beneficiaries WHERE beneficiary_id =?", [req.params.id], (err, rows) => {
+//     connection.query("DELETE  FROM beneficiaries WHERE beneficiary_id = ?", [req.params.id], (err, rows) => {
 //       connection.release();
 
 //       if (!err) {

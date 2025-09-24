@@ -8,17 +8,17 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 });
 
-// View donors
-exports.viewDonors = (req, res) => {
+// View centers
+exports.viewCenters = (req, res) => {
   pool.getConnection((err, connection) => {
     if (err) throw err;
     console.log("Connected as ID " + connection.threadId);
 
-    connection.query("SELECT * FROM donors ", (err, rows) => {
+    connection.query("SELECT * FROM distributionCenters ", (err, rows) => {
       connection.release();
 
       if (!err) {
-        res.render("donor", { rows });
+        res.render("centers", { rows });
       } else {
         console.log(err);
         res.sendStatus(500);
@@ -29,26 +29,27 @@ exports.viewDonors = (req, res) => {
   });
 };
 
-exports.newDonor = (req, res) => {
-    res.render("addDonor");
+exports.newCenter = (req, res) => {
+    res.render("addCenters");
   };
 
-  exports.createDonor = async (req, res) => {
-    const { name, contact, address } = req.body;
+
+  exports.createCenter = async (req, res) => {
+    const { name, location, contact } = req.body;
   
     pool.getConnection((err, connection) => {
       if (err) throw err;
       console.log("Connected as ID " + connection.threadId);
   
       const query =
-        "INSERT INTO donors (donor_name, contact_info, address) VALUES (?, ?, ?)";
-      const values = [name, contact, address];
+        "INSERT INTO distributionCenters (center_name, location, contact_info) VALUES (?, ?, ?)";
+      const values = [name, location, contact];
   
       connection.query(query, values, (err, rows) => {
         connection.release();
   
         if (!err) {
-          res.redirect("/donor");
+          res.redirect("/centers");
         } else {
           console.log(err);
           res.sendStatus(500);
@@ -57,7 +58,7 @@ exports.newDonor = (req, res) => {
     });
   };
 
-  exports.editDonor = (req, res) => {
+  exports.editCenter = (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
             console.error("Database connection failed:", err);
@@ -65,44 +66,42 @@ exports.newDonor = (req, res) => {
         }
         console.log("Connected as ID " + connection.threadId);
   
-        const query = "SELECT * FROM donors WHERE donor_id = ?";
+        const query = "SELECT * FROM distributionCenters WHERE center_id = ?";
         const params = [req.params.id];
   
         connection.query(query, params, (err, rows) => {
-            connection.release(); 
+            connection.release(); // Ensure connection is released
   
             if (err) {
                 console.error("Query execution failed:", err);
-                return res.status(500).send("Failed to fetch beneficiary data");
+                return res.status(500).send("Failed to fetch center data");
             }
   
             if (!rows.length) {
-                return res.status(404).send("DOnor not found");
+                return res.status(404).send("Center not found");
             }
   
             console.log("Data from the table:\n", rows);
   
             // Render the view with the fetched data
-            res.render("editDonor", { rows });
+            res.render("editcenter", { rows });
         });
     });
   };
-  
 
+  exports.updateCenter = (req, res) => {
 
-  exports.updateDonor = (req, res) => {
-
-    const { name, contact, address } = req.body;
+    const { name, location, contact } = req.body;
   
     pool.getConnection((err, connection) => {
       if (err) throw err;
       console.log("Connected as ID " + connection.threadId);
   
-      connection.query("UPDATE donors SET donor_name = ?, contact_info = ?, address = ? WHERE donor_id = ?", [name, contact, address, req.params.id], (err, rows) => {
+      connection.query("UPDATE distributionCenters SET center_name = ?, location = ?, contact_info = ?  WHERE center_id = ?", [name, location, contact, req.params.id], (err, rows) => {
         connection.release();
   
         if (!err) {
-          res.redirect("/donor");
+          res.redirect("/centers");
         } else {
           console.log(err);
           res.sendStatus(500);
@@ -112,3 +111,5 @@ exports.newDonor = (req, res) => {
       });
     });
   };
+  
+  

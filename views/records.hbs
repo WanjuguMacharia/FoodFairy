@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-6"><h1>Delivery Records</h1></div> 
+  <div class="col-6 d-flex justify-content-end">
+    <a href="/addRecord" type="button" class="btn btn-primary align-self-center">Add Record</a>
+  </div> 
+</div>
+
+
+<table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Donor</th>
+      <th scope="col">Beneficiary</th>
+      <th scope="col">Center</th>
+      <th scope="col">Food Type</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Delivery Date</th>
+      <th scope="col">Delivery Status</th>
+      <th scope="col" class="text-end">Action </th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    {{#each rows}}
+    <tr>
+      <th scope="row">{{this.deliveryRecords_id}}</th>
+      <td>{{donor_donor_name}}</td>
+      <td>{{beneficiary_beneficiary_name}}</td>
+      <td>{{center_center_name}}</td>
+      <td>{{food_food_name}}</td>
+      <td>{{quantity}}</td>
+      <td>{{delivery_date}}</td>
+      <td>{{delivery_status}}</td>
+      <td class="text-end">
+        {{!-- <a href="/viewBeneficiary/{{this.beneficiary_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-eye">View</i></a> --}}
+        <a href="/editRecords/{{this.deliveryRecords_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-pencil">Edit</i></a>
+        <a href="/{{this.deliveryRecords_id}}" type="button" class="btn btn-light btn-small" ><i class="bi bi-person-x">Delete</i></a>
+      </td>
+    </tr>
+
+    {{/each}}
+  </tbody>
+</table>
